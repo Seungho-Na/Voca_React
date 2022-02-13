@@ -9,14 +9,14 @@ function App() {
 	const [notes, setNotes] = useState({"일드/애니":[], "JLPT1급":[]});
   return (
     <div className="App">
-			<Router>
-				<Routes>
-					<Route exact path="/" element={<Home />} />
-					<Route exact path="/main" element={<Main />} />
-					<Route exact path="/add" element={<Add notes={notes} setNotes={setNotes}/>} />
-					<Route exact path="/note" element={<Note notes={notes}/>} />
-				</Routes>
-			</Router>
+      <Router>
+        <Routes>
+          <Route exact path="/" element={<Home />} />
+          <Route exact path="/main" element={<Main />} />
+          <Route exact path="/add" element={<Add notes={notes} setNotes={setNotes}/>} />
+          <Route exact path="/note" element={<Note notes={notes}/>} />
+        </Routes>
+      </Router>
     </div>
   );
 }
