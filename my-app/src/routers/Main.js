@@ -1,4 +1,4 @@
-import BasicButton from '../component/button/BasicButton';
+import BasicButton from '../components/BasicButton';
 import { Link } from 'react-router-dom';
 
 const Main = () =>  {
