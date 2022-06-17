@@ -1,75 +1,107 @@
-import React, {useState} from 'react';
+import React, { useState, useEffect } from 'react';
+import { db } from 'fbase';
+import {
+  doc,
+  onSnapshot,
+  collection,
+  query,
+  orderBy,
+} from 'firebase/firestore';
 import '../css/Note.css';
+import Word from 'components/Word';
 
-const Note = ({notes}) =>  {
-	const subjectList = Object.keys(notes);
-	const [subject, setSubject] = useState(subjectList[0]);
-	const [vocaToShow, setVocaToShow] = useState(notes[subject]);
-	
-	const onChange = async (e) => {
-		// async await으로 sub변수 안쓰고 할 수 있나? 
-		const sub = e.target.value;
-		await setSubject(sub)
-		await setVocaToShow(notes[sub]);
-		console.log(subject, vocaToShow);
+const Note = ({ userObj }) => {
+  // const subjectList = Object.keys(notes);
+  // const [subject, setSubject] = useState(subjectList[0]);
+  // const [vocaToShow, setVocaToShow] = useState(notes[subject]);
+  const [allWords, setAllWords] = useState([]);
+  const [pageWords, setPageWords] = useState([]);
+  const [noteList, setNoteList] = useState([]);
+  const [noteTitle, setNoteTitle] = useState('');
+  const [searchWord, setSearchWord] = useState('');
+  const onChange = (e) => {
+    const {
+      target: { value },
+    } = e;
+    setSearchWord(value);
   };
-	const onSearch = (e) => {
-		const searchWord = e.target.previousSibling.value;
-		console.log(searchWord);
-		const results = notes[subject].filter((voca) => 
-        voca.word === searchWord
+  const onNoteChange = (e) => {
+    const {
+      target: { value },
+    } = e;
+    setNoteTitle(value);
+    setPageWords(
+      allWords.filter((item) => item.note === value)
     );
-		setVocaToShow(results);
-		console.log(results);
-	}
+  };
+  const onSearch = (e) => {
+    const results = pageWords.filter(
+      (item) => item.word === searchWord
+    );
+    setPageWords(results);
+  };
+
+  const initNote = (data) => {
+    const noteSet = new Set(data.map((item) => item.note));
+    const notes = [...noteSet];
+    setNoteList(notes);
+    setNoteTitle(notes[0]);
+    setPageWords(
+      data.filter((item) => item.note === notes[0])
+    );
+    console.log(pageWords);
+  };
+
+  useEffect(() => {
+    const snapShotQuery = query(
+      collection(db, `${userObj.uid}`)
+    );
+    onSnapshot(snapShotQuery, (querySnapshot) => {
+      const wordData = querySnapshot.docs.map((doc) => ({
+        ...doc.data(),
+        id: doc.id,
+      }));
+      initNote(wordData);
+      setAllWords(wordData);
+    });
+  }, []);
   return (
     <div>
-			{/* 왜 이게 색갈이 바뀌노.. */}
-			<h1>{subject} ({notes[subject].length})</h1>
-			<label htmlFor="search">단어검색</label>
-			{/* 빈칸이면 에러문구 뜨게하기 */}
-			<input id="search"></input>
-			<button type="button" onClick={onSearch}>찾기</button>
-			<div>
-				<select id="note" name="note" onChange={onChange}>
-					{
-						subjectList.map((s, index) => 
-							<option key={index}>{s}</option>
-						)
-					}
-				</select>
-			</div>
-			<div className="container">
-				<div>
-					<h2>단어</h2>
-					{
-						vocaToShow.map( (voca, index) =>
-							<div key={index}>{voca.word}</div>
-						)
-					}
-				</div>
-				
-				<div>
-					<h2>뜻</h2>
-					{
-						vocaToShow.map( (voca, index) =>
-							<div key={index}>{voca.meaning}</div>
-						)
-					}
-				</div>
-				
-				<div>
-					<h2>예문</h2>
-					{
-						vocaToShow.map( (voca, index) =>
-							<div key={index}>{voca.example}</div>
-						)
-					}
-				</div>
-			</div>
+      <h1>내 노트</h1>
+      <label htmlFor="search">단어검색</label>
+      {/* 빈칸이면 에러문구 뜨게하기 */}
+      <input
+        id="search"
+        value={searchWord}
+        onChange={onChange}
+      ></input>
+      <button type="button" onClick={onSearch}>
+        찾기
+      </button>
+      <div>
+        <h1>{noteTitle}</h1>
+        <select
+          id="note"
+          name="note"
+          onChange={onNoteChange}
+        >
+          {noteList.map((note, index) => (
+            <option key={index}>{note}</option>
+          ))}
+        </select>
+      </div>
+      단어 뜻 예문
+      {pageWords.map((wordObj, index) => (
+        <div key={index}>
+          <Word
+            userObj={userObj}
+            wordObj={wordObj}
+            isOwner={wordObj.createrId === userObj.uid}
+          />
+        </div>
+      ))}
     </div>
   );
-}
+};
 
 export default Note;
-

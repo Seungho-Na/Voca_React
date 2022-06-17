@@ -6,23 +6,19 @@ import {
 } from 'react-router-dom';
 import Add from 'routers/Add';
 import Auth from 'routers/Auth';
-import Main from 'routers/Main';
+import Home from 'routers/Home';
 import Profile from 'routers/Profile';
 import Note from 'routers/Note';
-import Navigation from './components/Navigation';
+import Navigation from './Navigation';
 
-const AppRouter = ({ isLoggedIn }) => {
-  const [notes, setNotes] = useState({
-    '일드/애니': [],
-    JLPT1급: [],
-  });
+const AppRouter = ({ isLoggedIn, userObj }) => {
   return (
     <Router>
       {isLoggedIn && <Navigation />}
       <Routes>
         {isLoggedIn ? (
           <>
-            <Route exact path="/" element={<Main />} />
+            <Route exact path="/" element={<Home />} />
             <Route
               exact
               path="/profile"
@@ -31,22 +27,18 @@ const AppRouter = ({ isLoggedIn }) => {
             <Route
               exact
               path="/add"
-              element={
-                <Add notes={notes} setNotes={setNotes} />
-              }
+              element={<Add userObj={userObj} />}
             />
             <Route
               exact
               path="/note"
-              element={<Note notes={notes} />}
+              element={
+                <Note userObj={userObj} />
+              }
             />
           </>
         ) : (
-          <Route
-            exact
-            path="/"
-            element={<Auth />}
-          />
+          <Route exact path="/" element={<Auth />} />
         )}
       </Routes>
     </Router>

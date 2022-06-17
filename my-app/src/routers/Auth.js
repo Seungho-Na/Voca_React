@@ -2,7 +2,10 @@ import React, { useState } from 'react';
 import { auth } from 'fbase';
 import {
   createUserWithEmailAndPassword,
+  GithubAuthProvider,
+  GoogleAuthProvider,
   signInWithEmailAndPassword,
+  signInWithPopup,
 } from 'firebase/auth';
 
 const Auth = () => {
@@ -31,10 +34,22 @@ const Auth = () => {
         );
       }
       console.log(data);
-    } catch (error) {
-      console.log(error.message);
-      setError(error.massage);
+    } catch (e) {
+      console.log(e.message);
+      setError(e.message);
     }
+  };
+  const onSocialClick = async (event) => {
+    const {
+      target: { name },
+    } = event;
+    let provider;
+    if (name === 'google') {
+      provider = new GoogleAuthProvider();
+    } else if (name === 'github') {
+      provider = new GithubAuthProvider();
+    }
+    await signInWithPopup(auth, provider);
   };
   const onChange = (event) => {
     const {
@@ -56,7 +71,6 @@ const Auth = () => {
           value={email}
           onChange={onChange}
         />
-
         <input
           name="password"
           type="password"
@@ -74,6 +88,12 @@ const Auth = () => {
           ? 'you have account? click here'
           : 'create account'}
       </span>
+      <button name="google" onClick={onSocialClick}>
+        Continue with Google
+      </button>
+      <button name="github" onClick={onSocialClick}>
+        Continue with github
+      </button>
     </>
   );
 };
