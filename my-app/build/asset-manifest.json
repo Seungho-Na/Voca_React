@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/Voca_React/static/css/main.038e8bc5.css",
+    "main.js": "/Voca_React/static/js/main.9a44cf2d.js",
+    "index.html": "/Voca_React/index.html",
+    "main.038e8bc5.css.map": "/Voca_React/static/css/main.038e8bc5.css.map",
+    "main.9a44cf2d.js.map": "/Voca_React/static/js/main.9a44cf2d.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.038e8bc5.css",
+    "static/js/main.9a44cf2d.js"
+  ]
+}

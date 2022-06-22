@@ -5,10 +5,16 @@ import {
   updateDoc,
 } from 'firebase/firestore';
 import { db } from 'fbase';
+import 'css/Word.css';
 
-const Word = ({ userObj, wordObj, isOwner }) => {
+const Word = ({
+  userObj,
+  wordObj,
+  isOwner,
+  showMeaing,
+}) => {
   const [editing, setEditing] = useState(false);
-  const [newMean, setNewMean] = useState('');
+  const [newMean, setNewMean] = useState(wordObj.meaning);
   const wordRef = doc(
     db,
     `${userObj.uid}`,
@@ -18,9 +24,7 @@ const Word = ({ userObj, wordObj, isOwner }) => {
     setEditing((prev) => !prev);
   };
   const onDeleteClick = async () => {
-    const ok = window.confirm(
-      'ㄹㅇ지울거임?'
-    );
+    const ok = window.confirm('ㄹㅇ지울거임?');
     //confirm의 반환값은 boolean
     if (ok) {
       await deleteDoc(wordRef);
@@ -57,10 +61,18 @@ const Word = ({ userObj, wordObj, isOwner }) => {
           <button onClick={toggleEditing}>Cancel</button>
         </>
       ) : (
-        <>
-          {wordObj.word}&nbsp;
-          {wordObj.meaning}&nbsp;
-          {wordObj.example}
+        <div className="word-box">
+          <div className="word-box__content">
+            <div>
+              <h5>{wordObj.word}</h5>
+            </div>
+            {showMeaing && (
+              <div>
+                <h5>{wordObj.meaning}</h5>
+              </div>
+            )}
+            <div>{wordObj.example}</div>
+          </div>
           {isOwner && (
             <>
               <button onClick={onDeleteClick}>
@@ -71,7 +83,7 @@ const Word = ({ userObj, wordObj, isOwner }) => {
               </button>
             </>
           )}
-        </>
+        </div>
       )}
     </>
   );

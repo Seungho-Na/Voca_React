@@ -7,7 +7,7 @@ import {
   onSnapshot,
   query,
 } from 'firebase/firestore';
-import '../css/Add.css';
+import 'css/Add.css';
 
 const Add = ({ userObj }) => {
   const [noteList, setNoteList] = useState([]);
@@ -21,6 +21,9 @@ const Add = ({ userObj }) => {
     similiarWords: [],
     sources: [],
   });
+  const toggleMakeNote = () => {
+    setMakeNote((prev) => !prev);
+  };
   const onChange = (e) => {
     const {
       target: { name, value },
@@ -53,9 +56,6 @@ const Add = ({ userObj }) => {
     }
   };
 
-  const toggleMakeNote = () => {
-    setMakeNote((prev) => !prev);
-  };
   const handleEnter = (event) => {
     if (event.key.toLowerCase() === 'enter') {
       const form = event.target.form;

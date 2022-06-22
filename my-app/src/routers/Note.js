@@ -7,8 +7,8 @@ import {
   query,
   orderBy,
 } from 'firebase/firestore';
-import '../css/Note.css';
 import Word from 'components/Word';
+import 'css/Note.css';
 
 const Note = ({ userObj }) => {
   // const subjectList = Object.keys(notes);
@@ -19,7 +19,14 @@ const Note = ({ userObj }) => {
   const [noteList, setNoteList] = useState([]);
   const [noteTitle, setNoteTitle] = useState('');
   const [searchWord, setSearchWord] = useState('');
-  const onChange = (e) => {
+  const [showMeaing, setShowMeaning] = useState('');
+  const toggleShowMeaning = () => {
+    setShowMeaning((prev) => !prev);
+  };
+  const onToggleChange = () => {
+    toggleShowMeaning();
+  };
+  const onSearchChange = (e) => {
     const {
       target: { value },
     } = e;
@@ -38,7 +45,11 @@ const Note = ({ userObj }) => {
     const results = pageWords.filter(
       (item) => item.word === searchWord
     );
-    setPageWords(results);
+    if (searchWord === '') {
+      setPageWords(allWords);
+    } else {
+      setPageWords(results);
+    }
   };
 
   const initNote = (data) => {
@@ -73,8 +84,8 @@ const Note = ({ userObj }) => {
       <input
         id="search"
         value={searchWord}
-        onChange={onChange}
-      ></input>
+        onChange={onSearchChange}
+      />
       <button type="button" onClick={onSearch}>
         찾기
       </button>
@@ -90,13 +101,22 @@ const Note = ({ userObj }) => {
           ))}
         </select>
       </div>
-      단어 뜻 예문
+      <label className="switch">
+        <input
+          type="checkbox"
+          checked={showMeaing}
+          onChange={onToggleChange}
+        />
+        <span className="slider round"></span>
+      </label>
+      <span>뜻 보기</span>
       {pageWords.map((wordObj, index) => (
         <div key={index}>
           <Word
             userObj={userObj}
             wordObj={wordObj}
             isOwner={wordObj.createrId === userObj.uid}
+            showMeaing={showMeaing}
           />
         </div>
       ))}

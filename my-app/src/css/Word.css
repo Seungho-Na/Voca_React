@@ -1,0 +1,15 @@
+.word-box {
+  display: flex;
+}
+.word-box h5 {
+  margin: 10px 0;
+}
+.word-box__content {
+  display: grid;
+  grid-template-columns: 100px 100px 100px;
+}
+.word-box button {
+  width: 60px;
+  height: 30px;
+  margin: 10px;
+}
