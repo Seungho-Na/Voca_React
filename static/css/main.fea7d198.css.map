@@ -1,1 +1,0 @@
-{"version":3,"file":"static/css/main.fea7d198.css","mappings":"AAAA,OACC,YACD,CCFA,WACC,YAAa,CACb,uCACD","sources":["css/Add.css","css/Note.css"],"sourcesContent":["div > h1{\n\tcolor: tomato;\n}\n\nform {\n\t\n}",".container{\n\tdisplay: grid;\n\tgrid-template-columns: 150px 150px 150px;\n}"],"names":[],"sourceRoot":""}
