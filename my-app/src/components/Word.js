@@ -63,12 +63,16 @@ const Word = ({
       ) : (
         <div className="word-box">
           <div className="word-box__content">
-            <div>
-              <h5>{wordObj.word}</h5>
+            <div className="word-box__word">
+              <span>
+                {wordObj.word}
+              </span>
             </div>
             {showMeaing && (
-              <div>
-                <h5>{wordObj.meaning}</h5>
+              <div className="word-box__meaning">
+                <span >
+                  {wordObj.meaning}
+                </span>
               </div>
             )}
             <div>{wordObj.example}</div>

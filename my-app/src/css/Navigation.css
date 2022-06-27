@@ -1,0 +1,20 @@
+.navigation {
+  text-align: center;
+  text-decoration: none;
+}
+.navigation li {
+  display: inline-block;
+  line-height: 150%;
+  padding: 0 20px;
+  border-right: 1px solid rgba(0, 0, 0, 0.3);
+  text-decoration: none;
+}
+.navigation li:last-child {
+  border: none;
+}
+.navigation__link {
+  text-decoration: none;
+}
+.navigation__link:visited {
+  color: black;
+}

@@ -86,16 +86,10 @@ const Add = ({ userObj }) => {
     });
   }, []);
   return (
-    <div>
+    <div className="addContainer">
+      <h1>{noteTitle} 단어 추가</h1>
       <form onSubmit={onSubmit}>
         <table>
-          <thead>
-            <tr>
-              <th>
-                <h1>{noteTitle} 단어 추가(개수)</h1>
-              </th>
-            </tr>
-          </thead>
           <tbody>
             <tr>
               <td>단어장 선택</td>

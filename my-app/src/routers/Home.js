@@ -1,8 +1,9 @@
 import { Link } from 'react-router-dom';
+import 'css/Home.css';
 
 const Home = () => {
   return (
-    <div>
+    <div className="homeContainer">
       <h1>온라인 단어장</h1>
       <h2>(made by Seungho)</h2>
       <Link to="/note">

@@ -7,6 +7,7 @@ import {
   signInWithEmailAndPassword,
   signInWithPopup,
 } from 'firebase/auth';
+import 'css/Auth.css';
 
 const Auth = () => {
   const [email, setEmail] = useState();
@@ -63,8 +64,9 @@ const Auth = () => {
   };
 
   return (
-    <>
-      <form onSubmit={onSubmit}>
+    <div className="authContainer">
+      <span className='authLogo'>Voca React</span>
+      <form onSubmit={onSubmit} className="authForm">
         <input
           name="email"
           type="email"
@@ -94,7 +96,7 @@ const Auth = () => {
       <button name="github" onClick={onSocialClick}>
         Continue with github
       </button>
-    </>
+    </div>
   );
 };
 

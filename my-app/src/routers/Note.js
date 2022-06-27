@@ -11,9 +11,6 @@ import Word from 'components/Word';
 import 'css/Note.css';
 
 const Note = ({ userObj }) => {
-  // const subjectList = Object.keys(notes);
-  // const [subject, setSubject] = useState(subjectList[0]);
-  // const [vocaToShow, setVocaToShow] = useState(notes[subject]);
   const [allWords, setAllWords] = useState([]);
   const [pageWords, setPageWords] = useState([]);
   const [noteList, setNoteList] = useState([]);
@@ -77,39 +74,47 @@ const Note = ({ userObj }) => {
     });
   }, []);
   return (
-    <div>
-      <h1>내 노트</h1>
-      <label htmlFor="search">단어검색</label>
-      {/* 빈칸이면 에러문구 뜨게하기 */}
-      <input
-        id="search"
-        value={searchWord}
-        onChange={onSearchChange}
-      />
-      <button type="button" onClick={onSearch}>
-        찾기
-      </button>
-      <div>
-        <h1>{noteTitle}</h1>
-        <select
-          id="note"
-          name="note"
-          onChange={onNoteChange}
-        >
-          {noteList.map((note, index) => (
-            <option key={index}>{note}</option>
-          ))}
-        </select>
+    <div className="noteContainer">
+      <span className="noteTitle">{noteTitle}</span>
+
+      {/* 빈칸이면 에러문구 뜨게기 */}
+      <div className="searchBox">
+        <div>
+          <label htmlFor="search">단어검색</label>
+          <input
+            id="search"
+            value={searchWord}
+            onChange={onSearchChange}
+          />
+          <button type="button" onClick={onSearch}>
+            찾기
+          </button>
+        </div>
+        <div />
+        <div>
+          <select
+            id="note"
+            name="note"
+            onChange={onNoteChange}
+          >
+            {noteList.map((note, index) => (
+              <option key={index}>{note}</option>
+            ))}
+          </select>
+        </div>
+        <div>
+          <label className="switch">
+            <input
+              type="checkbox"
+              checked={showMeaing}
+              onChange={onToggleChange}
+            />
+            <span className="slider round"></span>
+          </label>
+          <span>뜻 보기</span>
+        </div>
       </div>
-      <label className="switch">
-        <input
-          type="checkbox"
-          checked={showMeaing}
-          onChange={onToggleChange}
-        />
-        <span className="slider round"></span>
-      </label>
-      <span>뜻 보기</span>
+
       {pageWords.map((wordObj, index) => (
         <div key={index}>
           <Word

@@ -1,15 +1,23 @@
 .word-box {
   display: flex;
 }
-.word-box h5 {
-  margin: 10px 0;
-}
 .word-box__content {
   display: grid;
   grid-template-columns: 100px 100px 100px;
+  margin: 10px 0;
+}
+
+.word-box__word {
+  line-height: 100%;
+  text-align: left;
+}
+.word-box__meaning {
+  line-height: 100%;
+  font-size: 0.85rem;
+  text-align: right;
 }
 .word-box button {
-  width: 60px;
-  height: 30px;
+  width: 4rem;
+  height: 2rem;
   margin: 10px;
 }
