@@ -41,12 +41,34 @@ const Word = ({
     await updateDoc(wordRef, {
       meaning: newMean,
     });
-    setNewMean('');
     setEditing(false);
   };
   return (
     <>
-      {editing ? (
+      <div className="word-box">
+        <div className="word-box__content">
+          <div className="word-box__word">
+            <span>{wordObj.word}</span>
+          </div>
+          {showMeaing && (
+            <div className="word-box__meaning">
+              <span>{wordObj.meaning}</span>
+            </div>
+          )}
+          <div>{wordObj.example}</div>
+        </div>
+        {isOwner && (
+          <>
+            <button onClick={onDeleteClick}>
+              단어 삭제
+            </button>
+            <button onClick={toggleEditing}>
+              단어 수정
+            </button>
+          </>
+        )}
+      </div>
+      {editing && (
         <>
           <form onSubmit={onUpdate}>
             <input
@@ -60,34 +82,6 @@ const Word = ({
           </form>
           <button onClick={toggleEditing}>Cancel</button>
         </>
-      ) : (
-        <div className="word-box">
-          <div className="word-box__content">
-            <div className="word-box__word">
-              <span>
-                {wordObj.word}
-              </span>
-            </div>
-            {showMeaing && (
-              <div className="word-box__meaning">
-                <span >
-                  {wordObj.meaning}
-                </span>
-              </div>
-            )}
-            <div>{wordObj.example}</div>
-          </div>
-          {isOwner && (
-            <>
-              <button onClick={onDeleteClick}>
-                단어 삭제
-              </button>
-              <button onClick={toggleEditing}>
-                단어 수정
-              </button>
-            </>
-          )}
-        </div>
       )}
     </>
   );

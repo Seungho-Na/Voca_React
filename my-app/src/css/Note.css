@@ -19,6 +19,16 @@
   flex-grow: 1;
 }
 
+.page_navi {
+}
+
+.page_navi li {
+  display: inline-block;
+  margin: 0 5px;
+}
+.page_navi li:hover {
+  cursor: pointer;
+}
 .switch {
   position: relative;
   display: inline-block;

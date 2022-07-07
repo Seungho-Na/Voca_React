@@ -141,6 +141,7 @@ const Add = ({ userObj }) => {
                   name="word"
                   onChange={onChange}
                   onKeyDown={handleEnter}
+                  required
                 ></input>
               </td>
             </tr>
@@ -153,6 +154,7 @@ const Add = ({ userObj }) => {
                   name="meaning"
                   onChange={onChange}
                   onKeyDown={handleEnter}
+                  required
                 />
               </td>
             </tr>

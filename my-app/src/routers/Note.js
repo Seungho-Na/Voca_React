@@ -11,9 +11,10 @@ import Word from 'components/Word';
 import 'css/Note.css';
 
 const Note = ({ userObj }) => {
-  const [allWords, setAllWords] = useState([]);
-  const [pageWords, setPageWords] = useState([]);
   const [noteList, setNoteList] = useState([]);
+  const [allWords, setAllWords] = useState([]);
+  const [noteWords, setNoteWords] = useState([]);
+  const [pageWords, setPageWords] = useState([]);
   const [noteTitle, setNoteTitle] = useState('');
   const [searchWord, setSearchWord] = useState('');
   const [showMeaing, setShowMeaning] = useState('');
@@ -29,40 +30,54 @@ const Note = ({ userObj }) => {
     } = e;
     setSearchWord(value);
   };
+  // 노트 카테고리에 맞는 단어 선택
   const onNoteChange = (e) => {
     const {
       target: { value },
     } = e;
     setNoteTitle(value);
-    setPageWords(
+    setNoteWords(
       allWords.filter((item) => item.note === value)
     );
   };
   const onSearch = (e) => {
-    const results = pageWords.filter(
+    const results = noteWords.filter(
       (item) => item.word === searchWord
     );
     if (searchWord === '') {
-      setPageWords(allWords);
+      setNoteWords(allWords);
     } else {
-      setPageWords(results);
+      setNoteWords(results);
     }
   };
 
+  const onPageClick = (e) => {
+    const {
+      target: { id },
+    } = e;
+    const pageIndex = parseInt(id);
+    setPageWords(
+      noteWords.slice(pageIndex * 10, (pageIndex + 1) * 10)
+    );
+  };
   const initNote = (data) => {
     const noteSet = new Set(data.map((item) => item.note));
     const notes = [...noteSet];
     setNoteList(notes);
+    // 노트 리스트의 첫번째 노트 보여주기
     setNoteTitle(notes[0]);
-    setPageWords(
-      data.filter((item) => item.note === notes[0])
+    const filttedWords = data.filter(
+      (item) => item.note === notes[0]
     );
-    console.log(pageWords);
+    setNoteWords(filttedWords);
+    // 10개씩 나누고 1페이지 먼저 보여주기
+    setPageWords(filttedWords.slice(0, 10));
   };
 
   useEffect(() => {
     const snapShotQuery = query(
-      collection(db, `${userObj.uid}`)
+      collection(db, `${userObj.uid}`),
+      orderBy('createdAt')
     );
     onSnapshot(snapShotQuery, (querySnapshot) => {
       const wordData = querySnapshot.docs.map((doc) => ({
@@ -125,6 +140,21 @@ const Note = ({ userObj }) => {
           />
         </div>
       ))}
+      <div>
+        <ul className="page_navi">
+          {[
+            ...Array(
+              Math.ceil(noteWords.length / 10)
+            ).keys(),
+          ].map((pageIndex) => (
+            <li key={pageIndex}>
+              <div id={pageIndex} onClick={onPageClick}>
+                {pageIndex + 1}
+              </div>
+            </li>
+          ))}
+        </ul>
+      </div>
     </div>
   );
 };
