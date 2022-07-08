@@ -29,6 +29,9 @@
 .page_navi li:hover {
   cursor: pointer;
 }
+/* .page li.active {
+  font-weight: bold;
+} */
 .switch {
   position: relative;
   display: inline-block;

@@ -6,6 +6,7 @@ import {
 } from 'firebase/firestore';
 import { db } from 'fbase';
 import 'css/Word.css';
+import { useEffect } from 'react';
 
 const Word = ({
   userObj,
@@ -14,7 +15,7 @@ const Word = ({
   showMeaing,
 }) => {
   const [editing, setEditing] = useState(false);
-  const [newMean, setNewMean] = useState(wordObj.meaning);
+  const [newMean, setNewMean] = useState('');
   const wordRef = doc(
     db,
     `${userObj.uid}`,
@@ -43,6 +44,9 @@ const Word = ({
     });
     setEditing(false);
   };
+  useEffect(() => {
+    setNewMean(wordObj.meaning);
+  }, [wordObj]);
   return (
     <>
       <div className="word-box">
@@ -55,7 +59,9 @@ const Word = ({
               <span>{wordObj.meaning}</span>
             </div>
           )}
-          <div>{wordObj.example}</div>
+          <div className="word-box__example">
+              <span>{wordObj.example}</span>
+            </div>
         </div>
         {isOwner && (
           <>

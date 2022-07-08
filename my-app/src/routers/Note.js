@@ -18,6 +18,7 @@ const Note = ({ userObj }) => {
   const [noteTitle, setNoteTitle] = useState('');
   const [searchWord, setSearchWord] = useState('');
   const [showMeaing, setShowMeaning] = useState('');
+  const [onActive, setOnActive] = useState(false);
   const toggleShowMeaning = () => {
     setShowMeaning((prev) => !prev);
   };
@@ -36,9 +37,12 @@ const Note = ({ userObj }) => {
       target: { value },
     } = e;
     setNoteTitle(value);
-    setNoteWords(
-      allWords.filter((item) => item.note === value)
+    console.log(allWords);
+    const changedWords = allWords.filter(
+      (item) => item.note === value
     );
+    setNoteWords(changedWords);
+    setPageWords(changedWords.slice(0, 10));
   };
   const onSearch = (e) => {
     const results = noteWords.filter(

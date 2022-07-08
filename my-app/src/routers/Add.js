@@ -21,6 +21,16 @@ const Add = ({ userObj }) => {
     similiarWords: [],
     sources: [],
   });
+  const initForm = () => {
+    setForm({
+      note: noteTitle,
+      word: '',
+      meaning: '',
+      example: '',
+      similiarWords: [],
+      sources: [],
+    });
+  };
   const toggleMakeNote = () => {
     setMakeNote((prev) => !prev);
   };
@@ -50,7 +60,8 @@ const Add = ({ userObj }) => {
           createrId: userObj.uid,
         }
       );
-      e.target.reset();
+      //e.target.reset();
+      initForm();
     } catch (e) {
       console.log(e);
     }
@@ -81,7 +92,6 @@ const Add = ({ userObj }) => {
         ...doc.data(),
         id: doc.id,
       }));
-      console.log(wordData);
       initNote(wordData);
     });
   }, []);
@@ -100,6 +110,7 @@ const Add = ({ userObj }) => {
                       type="text"
                       id="note"
                       name="note"
+                      value={form.note}
                       placeholder="새 단어장"
                       onChange={onChange}
                       required
@@ -139,6 +150,7 @@ const Add = ({ userObj }) => {
                   type="text"
                   id="word"
                   name="word"
+                  value={form.word}
                   onChange={onChange}
                   onKeyDown={handleEnter}
                   required
@@ -152,6 +164,7 @@ const Add = ({ userObj }) => {
                   type="text"
                   id="meaning"
                   name="meaning"
+                  value={form.meaning}
                   onChange={onChange}
                   onKeyDown={handleEnter}
                   required
@@ -166,6 +179,7 @@ const Add = ({ userObj }) => {
                   cols="33"
                   id="example"
                   name="example"
+                  value={form.example}
                   onChange={onChange}
                   onKeyDown={handleEnter}
                 ></textarea>
@@ -184,6 +198,7 @@ const Add = ({ userObj }) => {
                   type="text"
                   id="similiarWords"
                   name="similiarWords"
+                  value={form.similiarWords}
                   onChange={onChange}
                   onKeyDown={handleEnter}
                 />
@@ -200,6 +215,7 @@ const Add = ({ userObj }) => {
                   type="text"
                   id="sources"
                   name="sources"
+                  value={form.sources}
                   onChange={onChange}
                   onKeyDown={handleEnter}
                 />
