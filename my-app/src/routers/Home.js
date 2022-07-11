@@ -3,7 +3,7 @@ import 'css/Home.css';
 
 const Home = () => {
   return (
-    <div className="homeContainer">
+    <div className="container">
       <h1>온라인 단어장</h1>
       <h2>(made by Seungho)</h2>
       <Link to="/note">

@@ -1,28 +1,51 @@
 .word-box {
   display: flex;
+  width: 100%;
 }
-.word-box__content {
-  display: grid;
-  grid-template-columns: 100px 100px 100px;
-  margin: 10px 0;
+@media all and (min-width: 320px) {
+  .word-box__content {
+    display: grid;
+    grid-template-columns: 25vw 40vw 10vw;
+    margin: 10px 0;
+  }
+}
+@media all and (min-width: 768px) {
+  .word-box__content {
+    display: grid;
+    grid-template-columns: 15vw 35vw 10vw;
+    margin: 10px 0;
+  }
+}
+@media all and (min-width: 1024px) {
+  .word-box__content {
+    display: grid;
+    grid-template-columns: 15vw 25vw 5vw;
+    margin: 10px 0;
+  }
 }
 
 .word-box__word {
   line-height: 100%;
   text-align: left;
+  font-size: 4vh;
 }
 .word-box__meaning {
   line-height: 100%;
-  font-size: 0.85rem;
+  font-size: 2.5vh;
   text-align: right;
 }
 .word-box__example {
   line-height: 100%;
-  font-size: 0.85rem;
+  font-size: 2vh;
   text-align: center;
 }
-.word-box button {
-  width: 4rem;
-  height: 2rem;
-  margin: 10px;
+.pencil {
+  width: 3vh;
+  height: 3vh;
+  margin: auto 2px;
+}
+.delete {
+  width: 3vh;
+  height: 3vh;
+  margin: auto 2px;
 }

@@ -1,0 +1,16 @@
+@media all and (min-width: 320px) {
+  .wrap{
+    width: 90%
+  }
+}
+@media all and (min-width: 768px) {
+  .wrap{
+    width: 70%
+  }
+}
+@media all and (min-width: 1024px) {
+  .wrap{
+    width: 50%
+  }
+}
+

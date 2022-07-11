@@ -11,7 +11,7 @@ const Profile = () => {
     navigate('/', { replace: true });
   };
   return (
-    <div className="profileContainer">
+    <div className="container">
       <button onClick={onLogOutClick}>Log out</button>
     </div>
   );

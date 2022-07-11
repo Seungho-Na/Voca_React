@@ -1,25 +1,29 @@
-.noteContainer {
+.container {
+  margin: 0 auto;
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin: auto;
-  width: 500px;
 }
 
 .noteTitle {
   font-size: 2rem;
 }
 
-.searchBox {
+.headerBox {
   display: flex;
+  justify-content: space-between;
   width: 100%;
 }
 
-.searchBox div:nth-child(2) {
-  flex-grow: 1;
+.searchBox {
+}
+.selectBox {
 }
 
+.toggleBox {
+}
 .page_navi {
+  padding: 0;
 }
 
 .page_navi li {
@@ -28,10 +32,8 @@
 }
 .page_navi li:hover {
   cursor: pointer;
-}
-/* .page li.active {
   font-weight: bold;
-} */
+}
 .switch {
   position: relative;
   display: inline-block;

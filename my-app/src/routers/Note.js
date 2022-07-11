@@ -18,7 +18,6 @@ const Note = ({ userObj }) => {
   const [noteTitle, setNoteTitle] = useState('');
   const [searchWord, setSearchWord] = useState('');
   const [showMeaing, setShowMeaning] = useState('');
-  const [onActive, setOnActive] = useState(false);
   const toggleShowMeaning = () => {
     setShowMeaning((prev) => !prev);
   };
@@ -93,12 +92,12 @@ const Note = ({ userObj }) => {
     });
   }, []);
   return (
-    <div className="noteContainer">
+    <div className="wrap container">
       <span className="noteTitle">{noteTitle}</span>
 
       {/* 빈칸이면 에러문구 뜨게기 */}
-      <div className="searchBox">
-        <div>
+      <div className="headerBox">
+        <div className="searchBox">
           <label htmlFor="search">단어검색</label>
           <input
             id="search"
@@ -109,40 +108,39 @@ const Note = ({ userObj }) => {
             찾기
           </button>
         </div>
-        <div />
         <div>
-          <select
-            id="note"
-            name="note"
-            onChange={onNoteChange}
-          >
-            {noteList.map((note, index) => (
-              <option key={index}>{note}</option>
-            ))}
-          </select>
-        </div>
-        <div>
-          <label className="switch">
-            <input
-              type="checkbox"
-              checked={showMeaing}
-              onChange={onToggleChange}
-            />
-            <span className="slider round"></span>
-          </label>
-          <span>뜻 보기</span>
+          <div className="toggleBox">
+            <label className="switch">
+              <input
+                type="checkbox"
+                checked={showMeaing}
+                onChange={onToggleChange}
+              />
+              <span className="slider round"></span>
+            </label>
+            <span>뜻 보기</span>
+          </div>
+          <div className="selectBox">
+            <select
+              id="note"
+              name="note"
+              onChange={onNoteChange}
+            >
+              {noteList.map((note, index) => (
+                <option key={index}>{note}</option>
+              ))}
+            </select>
+          </div>
         </div>
       </div>
 
       {pageWords.map((wordObj, index) => (
-        <div key={index}>
-          <Word
-            userObj={userObj}
-            wordObj={wordObj}
-            isOwner={wordObj.createrId === userObj.uid}
-            showMeaing={showMeaing}
-          />
-        </div>
+        <Word
+          userObj={userObj}
+          wordObj={wordObj}
+          isOwner={wordObj.createrId === userObj.uid}
+          showMeaing={showMeaing}
+        />
       ))}
       <div>
         <ul className="page_navi">

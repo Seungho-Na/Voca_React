@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { onAuthStateChanged } from 'firebase/auth';
 import { auth } from 'fbase';
 import AppRouter from 'components/Router';
+import 'css/mediaqueries.css';
 
 function App() {
   const [init, setInit] = useState(false);

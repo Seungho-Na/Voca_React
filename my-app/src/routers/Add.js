@@ -96,7 +96,7 @@ const Add = ({ userObj }) => {
     });
   }, []);
   return (
-    <div className="addContainer">
+    <div className="container">
       <h1>{noteTitle} 단어 추가</h1>
       <form onSubmit={onSubmit}>
         <table>

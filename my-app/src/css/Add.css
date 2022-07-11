@@ -1,7 +1,6 @@
-.addContainer {
+.container {
+  margin: 0 auto;
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin: auto;
-  width: 500px;
 }

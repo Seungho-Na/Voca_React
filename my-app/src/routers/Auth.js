@@ -64,7 +64,7 @@ const Auth = () => {
   };
 
   return (
-    <div className="authContainer">
+    <div className="container">
       <span className='authLogo'>Voca React</span>
       <form onSubmit={onSubmit} className="authForm">
         <input

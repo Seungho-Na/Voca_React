@@ -7,6 +7,11 @@ import {
 import { db } from 'fbase';
 import 'css/Word.css';
 import { useEffect } from 'react';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import {
+  faPencil,
+  faX,
+} from '@fortawesome/free-solid-svg-icons';
 
 const Word = ({
   userObj,
@@ -60,17 +65,21 @@ const Word = ({
             </div>
           )}
           <div className="word-box__example">
-              <span>{wordObj.example}</span>
-            </div>
+            <span>{wordObj.example}</span>
+          </div>
         </div>
         {isOwner && (
           <>
-            <button onClick={onDeleteClick}>
-              단어 삭제
-            </button>
-            <button onClick={toggleEditing}>
-              단어 수정
-            </button>
+            <FontAwesomeIcon
+              icon={faPencil}
+              onClick={toggleEditing}
+              className="pencil"
+            />
+            <FontAwesomeIcon
+              icon={faX}
+              onClick={onDeleteClick}
+              className="delete"
+            />
           </>
         )}
       </div>
