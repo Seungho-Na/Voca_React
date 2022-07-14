@@ -5,7 +5,7 @@
 .navigation li {
   display: inline-block;
   line-height: 150%;
-  padding: 0 20px;
+  padding: 0 16px;
   border-right: 1px solid rgba(0, 0, 0, 0.3);
 }
 .navigation li:last-child {

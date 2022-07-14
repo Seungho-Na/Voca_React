@@ -10,6 +10,7 @@ import Home from 'routers/Home';
 import Profile from 'routers/Profile';
 import Note from 'routers/Note';
 import Navigation from './Navigation';
+import Test from 'routers/Test';
 
 const AppRouter = ({ isLoggedIn, userObj }) => {
   return (
@@ -34,6 +35,13 @@ const AppRouter = ({ isLoggedIn, userObj }) => {
               path="/note"
               element={
                 <Note userObj={userObj} />
+              }
+            />
+            <Route
+              exact
+              path="/test"
+              element={
+                <Test userObj={userObj} />
               }
             />
           </>

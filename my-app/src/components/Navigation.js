@@ -20,6 +20,11 @@ const Navigation = () => {
         </Link>
       </li>
       <li>
+        <Link to="test" className="navigation__link">
+          test
+        </Link>
+      </li>
+      <li>
         <Link to="profile" className="navigation__link">
           profile
         </Link>

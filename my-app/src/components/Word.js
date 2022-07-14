@@ -59,11 +59,9 @@ const Word = ({
           <div className="word-box__word">
             <span>{wordObj.word}</span>
           </div>
-          {showMeaing && (
-            <div className="word-box__meaning">
-              <span>{wordObj.meaning}</span>
-            </div>
-          )}
+          <div className="word-box__meaning">
+            {showMeaing && <span>{wordObj.meaning}</span>}
+          </div>
           <div className="word-box__example">
             <span>{wordObj.example}</span>
           </div>
