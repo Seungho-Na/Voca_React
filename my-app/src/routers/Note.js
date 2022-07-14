@@ -1,13 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import { db } from 'fbase';
 import {
-  doc,
   onSnapshot,
   collection,
   query,
   orderBy,
 } from 'firebase/firestore';
-import Word from 'components/Word';
+import NoteWord from 'components/NoteWord';
 import 'css/Note.css';
 
 const Note = ({ userObj }) => {
@@ -42,6 +41,7 @@ const Note = ({ userObj }) => {
     );
     setNoteWords(changedWords);
     setPageWords(changedWords.slice(0, 10));
+    console.log(changedWords)
   };
   const onSearch = (e) => {
     const results = noteWords.filter(
@@ -53,7 +53,6 @@ const Note = ({ userObj }) => {
       setNoteWords(results);
     }
   };
-
   const onPageClick = (e) => {
     const {
       target: { id },
@@ -135,7 +134,8 @@ const Note = ({ userObj }) => {
       </div>
 
       {pageWords.map((wordObj, index) => (
-        <Word
+        <NoteWord
+          key={index}
           userObj={userObj}
           wordObj={wordObj}
           isOwner={wordObj.createrId === userObj.uid}
