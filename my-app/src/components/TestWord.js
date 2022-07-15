@@ -6,8 +6,17 @@ import {
   updateDoc,
 } from 'firebase/firestore';
 import { db } from 'fbase';
+import { WORD_STACK, MEANING_STACK } from 'types';
+import 'css/TestWord.css';
 
-const TestWord = ({ userObj, wordObj }) => {
+const TestWord = ({
+  userObj,
+  wordObj,
+  stackType,
+  countIncrease,
+  okToGoBack,
+  setOkToGoBack,
+}) => {
   const wordRef = doc(
     db,
     `${userObj.uid}`,
@@ -15,19 +24,50 @@ const TestWord = ({ userObj, wordObj }) => {
   );
   const onUpdateStack = async (event) => {
     event.preventDefault();
-    console.log(wordObj.stack);
     await updateDoc(wordRef, {
-      stack: !!(wordObj.stack) ? wordObj.stack + 1 : 1,
+      [stackType]:
+        wordObj[stackType] === undefined
+          ? 1
+          : wordObj[stackType] + 1,
     });
+    countIncrease(1);
+    setOkToGoBack(false);
   };
   return (
-    <form onSubmit={onUpdateStack}>
+    <div className="test-box">
       <span>양심적으로 체크하삼</span>
-      <div>{wordObj.word}</div>
-      <div>스택 : {wordObj.stack}</div>
-
-      <input type="submit" value="Checked!" />
-    </form>
+      {stackType === WORD_STACK ? (
+        <h1 className="test-box__word">{wordObj.word}</h1>
+      ) : (
+        <h1 className="test-box__word">
+          {wordObj.meaning}
+        </h1>
+      )}
+      <div className="test-box__stack">
+        {wordObj[stackType] === undefined
+          ? 0
+          : wordObj[stackType]}
+        &nbsp;번째 복습임
+      </div>
+      <button onClick={onUpdateStack}>Checked!</button>
+      <button
+        onClick={() => {
+          countIncrease(1);
+          setOkToGoBack(true);
+        }}
+      >
+        패스
+      </button>
+      {okToGoBack && (
+        <button
+          onClick={() => {
+            countIncrease(-1);
+          }}
+        >
+          뒤로
+        </button>
+      )}
+    </div>
   );
 };
 export default TestWord;

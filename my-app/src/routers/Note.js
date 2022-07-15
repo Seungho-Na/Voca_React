@@ -62,13 +62,13 @@ const Note = ({ userObj }) => {
       noteWords.slice(pageIndex * 10, (pageIndex + 1) * 10)
     );
   };
-  const initNote = (data) => {
-    const noteSet = new Set(data.map((item) => item.note));
+  const initNote = (word_data) => {
+    const noteSet = new Set(word_data.map((item) => item.note));
     const notes = [...noteSet];
     setNoteList(notes);
     // 노트 리스트의 첫번째 노트 보여주기
     setNoteTitle(notes[0]);
-    const filttedWords = data.filter(
+    const filttedWords = word_data.filter(
       (item) => item.note === notes[0]
     );
     setNoteWords(filttedWords);

@@ -1,12 +1,11 @@
-import React, { useState } from 'react';
+import React, { useState,useEffect } from 'react';
 import {
   doc,
   deleteDoc,
   updateDoc,
 } from 'firebase/firestore';
 import { db } from 'fbase';
-import 'css/Word.css';
-import { useEffect } from 'react';
+import 'css/NoteWord.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
   faPencil,

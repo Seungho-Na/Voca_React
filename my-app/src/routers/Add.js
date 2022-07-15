@@ -58,10 +58,8 @@ const Add = ({ userObj }) => {
           ...form,
           createdAt: Date.now(),
           createrId: userObj.uid,
-          stack: 0,
         }
       );
-      //e.target.reset();
       initForm();
     } catch (e) {
       console.log(e);

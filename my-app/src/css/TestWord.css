@@ -1,0 +1,17 @@
+.test-box {
+  text-align: center;
+}
+.test-box span {
+  color: rgba(255, 0, 0, 0.6);
+  display: block;
+  margin-top: 1rem;
+}
+.test-box h1 {
+  margin: 1rem 0;
+}
+.test-box__stack {
+  text-align: right;
+}
+.test-box button {
+  margin: 0 3px;
+}
