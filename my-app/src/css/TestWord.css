@@ -1,13 +1,18 @@
 .test-box {
   text-align: center;
 }
-.test-box span {
+.test-box > span:first-child {
   color: rgba(255, 0, 0, 0.6);
   display: block;
   margin-top: 1rem;
 }
-.test-box h1 {
+.test-box__question {
+  font-size: 3.5rem;
+  line-height: 100%;
+  font-weight: bold;
+  display: block;
   margin: 1rem 0;
+
 }
 .test-box__stack {
   text-align: right;

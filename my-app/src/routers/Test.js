@@ -104,14 +104,16 @@ const Test = ({ userObj }) => {
       {testNoteTitle ? (
         stackType ? (
           <>
-            <button onClick={onNoteReset}>
-              노트 변경하기
-            </button>
-            <button onClick={onToggleTestType}>
-              {stackType === WORD_STACK
-                ? '뜻으로 시험보기'
-                : '단어로 시험보기'}
-            </button>
+            <div>
+              <button onClick={onNoteReset}>
+                노트 변경하기
+              </button>
+              <button onClick={onToggleTestType}>
+                {stackType === WORD_STACK
+                  ? '뜻으로 시험보기'
+                  : '단어로 시험보기'}
+              </button>
+            </div>
             <div>
               {testWords.map(
                 (wordObj, index) =>
@@ -130,13 +132,15 @@ const Test = ({ userObj }) => {
               {count === testWords.length && (
                 <>
                   <div>다 했어요 ㅊㅊ</div>
-                  {okToGoBack && <button
-                    onClick={() => {
-                      countIncrease(-1);
-                    }}
-                  >
-                    뒤로
-                  </button>}
+                  {okToGoBack && (
+                    <button
+                      onClick={() => {
+                        countIncrease(-1);
+                      }}
+                    >
+                      뒤로
+                    </button>
+                  )}
                 </>
               )}
             </div>

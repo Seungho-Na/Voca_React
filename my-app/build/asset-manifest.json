@@ -1,13 +1,13 @@
 {
   "files": {
-    "main.css": "/Voca_React/static/css/main.3b48f7cb.css",
-    "main.js": "/Voca_React/static/js/main.b2ed289d.js",
+    "main.css": "/Voca_React/static/css/main.6f7d26fd.css",
+    "main.js": "/Voca_React/static/js/main.6f5476d5.js",
     "index.html": "/Voca_React/index.html",
-    "main.3b48f7cb.css.map": "/Voca_React/static/css/main.3b48f7cb.css.map",
-    "main.b2ed289d.js.map": "/Voca_React/static/js/main.b2ed289d.js.map"
+    "main.6f7d26fd.css.map": "/Voca_React/static/css/main.6f7d26fd.css.map",
+    "main.6f5476d5.js.map": "/Voca_React/static/js/main.6f5476d5.js.map"
   },
   "entrypoints": [
-    "static/css/main.3b48f7cb.css",
-    "static/js/main.b2ed289d.js"
+    "static/css/main.6f7d26fd.css",
+    "static/js/main.6f5476d5.js"
   ]
 }

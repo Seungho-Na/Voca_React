@@ -33,15 +33,15 @@ const TestWord = ({
     countIncrease(1);
     setOkToGoBack(false);
   };
-  return (
+  return(
     <div className="test-box">
       <span>양심적으로 체크하삼</span>
       {stackType === WORD_STACK ? (
-        <h1 className="test-box__word">{wordObj.word}</h1>
+        <span className="test-box__question">{wordObj.word}</span>
       ) : (
-        <h1 className="test-box__word">
+        <span className="test-box__question">
           {wordObj.meaning}
-        </h1>
+        </span>
       )}
       <div className="test-box__stack">
         {wordObj[stackType] === undefined
