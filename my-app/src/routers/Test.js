@@ -7,6 +7,7 @@ import {
   orderBy,
 } from 'firebase/firestore';
 import TestWord from 'components/TestWord';
+import ReviewWord from 'components/ReviewWord';
 import 'css/Test.css';
 import { WORD_STACK, MEANING_STACK } from 'types';
 
@@ -14,15 +15,12 @@ const Test = ({ userObj }) => {
   const [noteList, setNoteList] = useState([]);
   const [allWords, setAllWords] = useState([]);
   const [testWords, setTestWords] = useState([]);
+  const [reviewWords, setReviewWords] = useState([]);
   const [testNoteTitle, setTestNoteTitle] = useState('');
   const [count, setCount] = useState(0);
   const [stackType, setStackType] = useState('');
-  const [okToGoBack, setOkToGoBack] = useState(false);
-  const countIncrease = (i) => {
-    if (count === 0 && i === -1) {
-      return;
-    }
-    setCount((prev) => prev + i);
+  const countIncrease = () => {
+    setCount((prev) => prev + 1);
   };
   const filterTestWords = (stack_type) => {
     const selectedWords = allWords.filter(
@@ -105,16 +103,28 @@ const Test = ({ userObj }) => {
         stackType ? (
           <>
             <div>
-              <button onClick={onNoteReset}>
-                노트 변경하기
-              </button>
-              <button onClick={onToggleTestType}>
-                {stackType === WORD_STACK
-                  ? '뜻으로 시험보기'
-                  : '단어로 시험보기'}
-              </button>
-            </div>
-            <div>
+              {count === testWords.length ? (
+                <>
+                  <div>다 했어요 ㅊㅊ 이제 복습하세여</div>
+                  {reviewWords.map((wordObj, index) => (
+                    <ReviewWord
+                      key={index}
+                      wordObj={wordObj}
+                    />
+                  ))}
+                </>
+              ) : (
+                <div>
+                  <button onClick={onNoteReset}>
+                    노트 변경하기
+                  </button>
+                  <button onClick={onToggleTestType}>
+                    {stackType === WORD_STACK
+                      ? '뜻으로 시험보기'
+                      : '단어로 시험보기'}
+                  </button>
+                </div>
+              )}
               {testWords.map(
                 (wordObj, index) =>
                   count === index && (
@@ -124,24 +134,9 @@ const Test = ({ userObj }) => {
                       wordObj={wordObj}
                       stackType={stackType}
                       countIncrease={countIncrease}
-                      okToGoBack={okToGoBack}
-                      setOkToGoBack={setOkToGoBack}
+                      setReviewWords={setReviewWords}
                     />
                   )
-              )}
-              {count === testWords.length && (
-                <>
-                  <div>다 했어요 ㅊㅊ</div>
-                  {okToGoBack && (
-                    <button
-                      onClick={() => {
-                        countIncrease(-1);
-                      }}
-                    >
-                      뒤로
-                    </button>
-                  )}
-                </>
               )}
             </div>
           </>

@@ -12,7 +12,7 @@ import {
   faX,
 } from '@fortawesome/free-solid-svg-icons';
 
-const Word = ({
+const NoteWord = ({
   userObj,
   wordObj,
   isOwner,
@@ -99,4 +99,4 @@ const Word = ({
   );
 };
 
-export default Word;
+export default NoteWord;

@@ -1,8 +1,6 @@
 import React from 'react';
 import {
   doc,
-  query,
-  collection,
   updateDoc,
 } from 'firebase/firestore';
 import { db } from 'fbase';
@@ -14,8 +12,7 @@ const TestWord = ({
   wordObj,
   stackType,
   countIncrease,
-  okToGoBack,
-  setOkToGoBack,
+  setReviewWords
 }) => {
   const wordRef = doc(
     db,
@@ -30,14 +27,15 @@ const TestWord = ({
           ? 1
           : wordObj[stackType] + 1,
     });
-    countIncrease(1);
-    setOkToGoBack(false);
+    countIncrease();
   };
-  return(
+  return (
     <div className="test-box">
       <span>양심적으로 체크하삼</span>
       {stackType === WORD_STACK ? (
-        <span className="test-box__question">{wordObj.word}</span>
+        <span className="test-box__question">
+          {wordObj.word}
+        </span>
       ) : (
         <span className="test-box__question">
           {wordObj.meaning}
@@ -49,24 +47,18 @@ const TestWord = ({
           : wordObj[stackType]}
         &nbsp;번째 복습임
       </div>
-      <button onClick={onUpdateStack}>Checked!</button>
+      <button className="btn" onClick={onUpdateStack}>
+        <span>Checked!</span>
+      </button>
       <button
+        className="btn red"
         onClick={() => {
-          countIncrease(1);
-          setOkToGoBack(true);
+          countIncrease();
+          setReviewWords((prew) => [...prew, wordObj])
         }}
       >
-        패스
+        <span>패스</span>
       </button>
-      {okToGoBack && (
-        <button
-          onClick={() => {
-            countIncrease(-1);
-          }}
-        >
-          뒤로
-        </button>
-      )}
     </div>
   );
 };
