@@ -11,11 +11,13 @@ import Profile from 'routers/Profile';
 import Note from 'routers/Note';
 import Navigation from './Navigation';
 import Test from 'routers/Test';
+import NightModeButton from './NightModeButton';
 
 const AppRouter = ({ isLoggedIn, userObj }) => {
   return (
     <Router>
       {isLoggedIn && <Navigation />}
+      <NightModeButton />
       <Routes>
         {isLoggedIn ? (
           <>

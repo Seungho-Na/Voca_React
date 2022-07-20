@@ -5,32 +5,32 @@
   align-items: center;
 }
 
-.noteTitle {
+.note-title {
   font-size: 2rem;
 }
 
-.headerBox {
+.header-box {
   display: flex;
   justify-content: space-between;
   width: 100%;
 }
 
-.searchBox {
+.search-box {
 }
-.selectBox {
+.select-box {
 }
 
-.toggleBox {
+.toggle-box {
 }
-.page_navi {
+.page-navi {
   padding: 0;
 }
 
-.page_navi li {
+.page-navi li {
   display: inline-block;
   margin: 0 5px;
 }
-.page_navi li:hover {
+.page-navi li:hover {
   cursor: pointer;
   font-weight: bold;
 }

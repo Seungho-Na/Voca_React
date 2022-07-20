@@ -92,11 +92,11 @@ const Note = ({ userObj }) => {
   }, []);
   return (
     <div className="wrap container">
-      <span className="noteTitle">{noteTitle}</span>
+      <span className="note-title">{noteTitle}</span>
 
       {/* 빈칸이면 에러문구 뜨게기 */}
-      <div className="headerBox">
-        <div className="searchBox">
+      <div className="header-box">
+        <div className="search-box">
           <label htmlFor="search">단어검색</label>
           <input
             id="search"
@@ -108,7 +108,7 @@ const Note = ({ userObj }) => {
           </button>
         </div>
         <div>
-          <div className="toggleBox">
+          <div className="toggle-box">
             <label className="switch">
               <input
                 type="checkbox"
@@ -119,7 +119,7 @@ const Note = ({ userObj }) => {
             </label>
             <span>뜻 보기</span>
           </div>
-          <div className="selectBox">
+          <div className="select-box">
             <select
               id="note"
               name="note"
@@ -143,7 +143,7 @@ const Note = ({ userObj }) => {
         />
       ))}
       <div>
-        <ul className="page_navi">
+        <ul className="page-navi">
           {[
             ...Array(
               Math.ceil(noteWords.length / 10)

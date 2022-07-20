@@ -41,7 +41,7 @@ const Test = ({ userObj }) => {
     });
     setTestWords(filttedWords);
   };
-  const onNoteReset = (e) => {
+  const onNoteReset = () => {
     setTestNoteTitle('');
     setStackType('');
     setCount(0);
@@ -76,6 +76,9 @@ const Test = ({ userObj }) => {
       filterTestWords(MEANING_STACK);
     }
   };
+  const onTestQuit = () => {
+    setTestWords((prev) => prev.slice(0, count));
+  };
   const initTest = (word_data) => {
     const noteSet = new Set(
       word_data.map((item) => item.note)
@@ -102,18 +105,18 @@ const Test = ({ userObj }) => {
       {testNoteTitle ? (
         stackType ? (
           <>
-            <div>
-              {count === testWords.length ? (
-                <>
-                  <div>다 했어요 ㅊㅊ 이제 복습하세여</div>
-                  {reviewWords.map((wordObj, index) => (
-                    <ReviewWord
-                      key={index}
-                      wordObj={wordObj}
-                    />
-                  ))}
-                </>
-              ) : (
+            {count === testWords.length ? (
+              <>
+                <div>다 했어요 ㅊㅊ 이제 복습하세여</div>
+                {reviewWords.map((wordObj, index) => (
+                  <ReviewWord
+                    key={index}
+                    wordObj={wordObj}
+                  />
+                ))}
+              </>
+            ) : (
+              <>
                 <div>
                   <button onClick={onNoteReset}>
                     노트 변경하기
@@ -124,21 +127,24 @@ const Test = ({ userObj }) => {
                       : '단어로 시험보기'}
                   </button>
                 </div>
-              )}
-              {testWords.map(
-                (wordObj, index) =>
-                  count === index && (
-                    <TestWord
-                      key={index}
-                      userObj={userObj}
-                      wordObj={wordObj}
-                      stackType={stackType}
-                      countIncrease={countIncrease}
-                      setReviewWords={setReviewWords}
-                    />
-                  )
-              )}
-            </div>
+                {testWords.map(
+                  (wordObj, index) =>
+                    count === index && (
+                      <TestWord
+                        key={index}
+                        userObj={userObj}
+                        wordObj={wordObj}
+                        stackType={stackType}
+                        countIncrease={countIncrease}
+                        setReviewWords={setReviewWords}
+                      />
+                    )
+                )}
+                <button id="quit_btn" onClick={onTestQuit}>
+                  테스트 그만하기
+                </button>
+              </>
+            )}
           </>
         ) : (
           <>
