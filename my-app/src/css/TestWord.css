@@ -1,11 +1,7 @@
 .test-box {
   text-align: center;
 }
-.test-box > span:first-child {
-  color: rgba(255, 0, 0, 0.6);
-  display: block;
-  margin-top: 1rem;
-}
+
 .test-box__question {
   font-size: 3.5rem;
   line-height: 100%;

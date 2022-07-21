@@ -31,7 +31,6 @@ const TestWord = ({
   };
   return (
     <div className="test-box">
-      <span>양심적으로 체크하삼</span>
       {stackType === WORD_STACK ? (
         <span className="test-box__question">
           {wordObj.word}

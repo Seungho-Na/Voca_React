@@ -35,7 +35,7 @@ const Test = ({ userObj }) => {
       } else {
         return (
           (Date.now() - createdTime) / 1000 >
-          3600 * 24 * 2 ** (stack - 1)
+          3600 * 24 * 3 ** stack
         );
       }
     });
@@ -127,6 +127,8 @@ const Test = ({ userObj }) => {
                       : '단어로 시험보기'}
                   </button>
                 </div>
+                <span className='alert-text'>양심적으로 체크하삼</span>
+                <span>({count}/{testWords.length})</span>
                 {testWords.map(
                   (wordObj, index) =>
                     count === index && (

@@ -9,6 +9,11 @@
   margin: 0 3px;
 }
 
+.alert-text {
+  color: rgba(255, 0, 0, 0.6);
+  display: block;
+  margin-top: 1rem;
+}
 
 #quit_btn {
   margin: 1rem 0;
