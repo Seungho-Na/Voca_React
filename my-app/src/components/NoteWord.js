@@ -1,4 +1,4 @@
-import React, { useState,useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import {
   doc,
   deleteDoc,
@@ -12,19 +12,19 @@ import {
   faX,
 } from '@fortawesome/free-solid-svg-icons';
 
-const NoteWord = ({
-  userObj,
-  wordObj,
-  isOwner,
-  showMeaing,
-}) => {
+const NoteWord = ({ userObj, wordObj, isOwner }) => {
   const [editing, setEditing] = useState(false);
   const [newMean, setNewMean] = useState('');
+  const [showMeaing, setShowMeaning] = useState(false);
   const wordRef = doc(
     db,
     `${userObj.uid}`,
     `${wordObj.id}`
   );
+
+  const toggleShowMeaning = () => {
+    setShowMeaning((prev) => !prev);
+  };
   const toggleEditing = () => {
     setEditing((prev) => !prev);
   };
@@ -58,8 +58,19 @@ const NoteWord = ({
           <div className="word-box__word">
             <span>{wordObj.word}</span>
           </div>
-          <div className="word-box__meaning">
-            {showMeaing && <span>{wordObj.meaning}</span>}
+          <div
+            className="word-box__meaning"
+            onClick={toggleShowMeaning}
+          >
+            {showMeaing ? (
+              <div className="show">
+                <span>{wordObj.meaning}</span>
+              </div>
+            ) : (
+              <div className="hidden">
+                <span>Click to show meaning</span>
+              </div>
+            )}
           </div>
           <div className="word-box__example">
             <span>{wordObj.example}</span>

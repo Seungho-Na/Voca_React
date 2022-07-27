@@ -5,22 +5,22 @@
 @media all and (min-width: 320px) {
   .word-box__content {
     display: grid;
-    grid-template-columns: 20vw 35vw 20vw;
     margin: 10px 0;
+    grid-template-columns: 20vw 35vw 20vw;
   }
 }
 @media all and (min-width: 768px) {
   .word-box__content {
     display: grid;
-    grid-template-columns: 15vw 35vw 10vw;
     margin: 10px 0;
+    grid-template-columns: 15vw 35vw 10vw;
   }
 }
 @media all and (min-width: 1024px) {
   .word-box__content {
     display: grid;
-    grid-template-columns: 15vw 25vw 5vw;
     margin: 10px 0;
+    grid-template-columns: 15vw 25vw 5vw;
   }
 }
 
@@ -30,9 +30,18 @@
   font-size: 4vh;
 }
 .word-box__meaning {
-  line-height: 100%;
+  text-align: center;
+  height: 4vh;
+}
+.show {
   font-size: 2.5vh;
-  text-align: right;
+  line-height: 4vh;
+}
+.hidden {
+  opacity: 0.3;
+  font-size: 2vh;
+  line-height: 4vh;
+  border: 1px dotted;
 }
 .word-box__example {
   line-height: 100%;

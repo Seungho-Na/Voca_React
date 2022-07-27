@@ -16,13 +16,7 @@ const Note = ({ userObj }) => {
   const [pageWords, setPageWords] = useState([]);
   const [noteTitle, setNoteTitle] = useState('');
   const [searchWord, setSearchWord] = useState('');
-  const [showMeaing, setShowMeaning] = useState('');
-  const toggleShowMeaning = () => {
-    setShowMeaning((prev) => !prev);
-  };
-  const onToggleChange = () => {
-    toggleShowMeaning();
-  };
+  
   const onSearchChange = (e) => {
     const {
       target: { value },
@@ -94,13 +88,14 @@ const Note = ({ userObj }) => {
     <div className="wrap container">
       <span className="note-title">{noteTitle}</span>
 
-      {/* 빈칸이면 에러문구 뜨게기 */}
+      {/* 빈칸이면 에러문구 뜨게하기 */}
       <div className="header-box">
         <div className="search-box">
           <label htmlFor="search">단어검색</label>
           <input
             id="search"
             value={searchWord}
+            placeholder="찾는 단어를 입력하세요"
             onChange={onSearchChange}
           />
           <button type="button" onClick={onSearch}>
@@ -108,17 +103,6 @@ const Note = ({ userObj }) => {
           </button>
         </div>
         <div>
-          <div className="toggle-box">
-            <label className="switch">
-              <input
-                type="checkbox"
-                checked={showMeaing}
-                onChange={onToggleChange}
-              />
-              <span className="slider round"></span>
-            </label>
-            <span>뜻 보기</span>
-          </div>
           <div className="select-box">
             <select
               id="note"
@@ -139,7 +123,6 @@ const Note = ({ userObj }) => {
           userObj={userObj}
           wordObj={wordObj}
           isOwner={wordObj.createrId === userObj.uid}
-          showMeaing={showMeaing}
         />
       ))}
       <div>
