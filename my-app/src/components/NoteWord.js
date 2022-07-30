@@ -48,6 +48,7 @@ const NoteWord = ({ userObj, wordObj, isOwner }) => {
     });
     setEditing(false);
   };
+
   useEffect(() => {
     setNewMean(wordObj.meaning);
   }, [wordObj]);
@@ -68,7 +69,7 @@ const NoteWord = ({ userObj, wordObj, isOwner }) => {
               </div>
             ) : (
               <div className="hidden">
-                <span>Click to show meaning</span>
+                <span>Show meaning</span>
               </div>
             )}
           </div>

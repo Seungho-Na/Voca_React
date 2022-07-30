@@ -16,7 +16,10 @@ const Note = ({ userObj }) => {
   const [pageWords, setPageWords] = useState([]);
   const [noteTitle, setNoteTitle] = useState('');
   const [searchWord, setSearchWord] = useState('');
-  
+  const [pageIndex, setPageIndex] = useState(0);
+  const [startX, setStartX] = useState(0);
+  const [endX, setEndX] = useState(0);
+
   const onSearchChange = (e) => {
     const {
       target: { value },
@@ -35,29 +38,79 @@ const Note = ({ userObj }) => {
     );
     setNoteWords(changedWords);
     setPageWords(changedWords.slice(0, 10));
-    console.log(changedWords)
+    console.log(changedWords);
   };
   const onSearch = (e) => {
-    const results = noteWords.filter(
-      (item) => item.word === searchWord
-    );
-    if (searchWord === '') {
-      setNoteWords(allWords);
-    } else {
-      setNoteWords(results);
+    const results = noteWords.filter((item) => {
+      if (searchWord === '') {
+        return false;
+      } else {
+        return item.word.includes(searchWord);
+      }
+    });
+    if (results.length === 0) {
+      const preNote = allWords.filter(
+        (item) => item.note === noteTitle
+      );
+      setNoteWords(preNote);
+      setPageWords(preNote.slice(0, 10));
+      return;
     }
+    setNoteWords(results);
+    setPageWords(results.slice(0, 10));
   };
   const onPageClick = (e) => {
     const {
       target: { id },
     } = e;
-    const pageIndex = parseInt(id);
+    const page_index = parseInt(id);
+    setPageIndex(page_index);
     setPageWords(
-      noteWords.slice(pageIndex * 10, (pageIndex + 1) * 10)
+      noteWords.slice(
+        page_index * 10,
+        (page_index + 1) * 10
+      )
     );
   };
+  const prev = () => {
+    if (pageIndex >= 0) {
+      setPageIndex((prev) => prev - 1);
+      setPageWords(
+        noteWords.slice(
+          pageIndex * 10,
+          (pageIndex + 1) * 10
+        )
+      );
+    }
+  };
+  const next = () => {
+    if (pageIndex < Math.ceil(noteWords.length / 10)) {
+      setPageIndex((prev) => prev + 1);
+      setPageWords(
+        noteWords.slice(
+          pageIndex * 10,
+          (pageIndex + 1) * 10
+        )
+      );
+    }
+  };
+  const onTouchStart = (event) => {
+    const start_x = event.touches[0].pageX;
+    setStartX(start_x);
+  };
+  const onTouchEnd = (event) => {
+    const end_x = event.changedTouches[0].pageX;
+    setEndX(end_x);
+    if (startX > end_x) {
+      next();
+    } else {
+      prev();
+    }
+  };
   const initNote = (word_data) => {
-    const noteSet = new Set(word_data.map((item) => item.note));
+    const noteSet = new Set(
+      word_data.map((item) => item.note)
+    );
     const notes = [...noteSet];
     setNoteList(notes);
     // 노트 리스트의 첫번째 노트 보여주기
@@ -87,15 +140,14 @@ const Note = ({ userObj }) => {
   return (
     <div className="wrap container">
       <span className="note-title">{noteTitle}</span>
-
       {/* 빈칸이면 에러문구 뜨게하기 */}
       <div className="header-box">
         <div className="search-box">
           <label htmlFor="search">단어검색</label>
           <input
             id="search"
-            value={searchWord}
             placeholder="찾는 단어를 입력하세요"
+            value={searchWord}
             onChange={onSearchChange}
           />
           <button type="button" onClick={onSearch}>
@@ -116,25 +168,30 @@ const Note = ({ userObj }) => {
           </div>
         </div>
       </div>
-
-      {pageWords.map((wordObj, index) => (
-        <NoteWord
-          key={index}
-          userObj={userObj}
-          wordObj={wordObj}
-          isOwner={wordObj.createrId === userObj.uid}
-        />
-      ))}
+      <div
+        className="touch-box"
+        onTouchStart={onTouchStart}
+        onTouchEnd={onTouchEnd}
+      >
+        {pageWords.map((wordObj, index) => (
+          <NoteWord
+            key={index}
+            userObj={userObj}
+            wordObj={wordObj}
+            isOwner={wordObj.createrId === userObj.uid}
+          />
+        ))}
+      </div>
       <div>
         <ul className="page-navi">
           {[
             ...Array(
               Math.ceil(noteWords.length / 10)
             ).keys(),
-          ].map((pageIndex) => (
-            <li key={pageIndex}>
-              <div id={pageIndex} onClick={onPageClick}>
-                {pageIndex + 1}
+          ].map((page_index) => (
+            <li key={page_index}>
+              <div id={page_index} onClick={onPageClick}>
+                {page_index + 1}
               </div>
             </li>
           ))}

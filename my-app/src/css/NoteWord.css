@@ -24,23 +24,25 @@
   }
 }
 
+.touch-box {
+}
 .word-box__word {
   line-height: 100%;
   text-align: left;
-  font-size: 4vh;
+  font-size: 3.5vh;
 }
 .word-box__meaning {
   text-align: center;
-  height: 4vh;
+  height: 3vh;
 }
 .show {
   font-size: 2.5vh;
-  line-height: 4vh;
+  line-height: 3vh;
 }
 .hidden {
   opacity: 0.3;
   font-size: 2vh;
-  line-height: 4vh;
+  line-height: 3vh;
   border: 1px dotted;
 }
 .word-box__example {
