@@ -101,7 +101,7 @@ const Add = ({ userObj }) => {
         <table>
           <tbody>
             <tr>
-              <td>단어장 선택</td>
+              <td>{makeNote ? "단어장 만들기" : "단어장 선택"}</td>
               <td>
                 {makeNote ? (
                   <>

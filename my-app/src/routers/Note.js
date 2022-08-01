@@ -92,6 +92,7 @@ const Note = ({ userObj }) => {
           (pageIndex + 1) * 10
         )
       );
+       
     }
   };
   const onTouchStart = (event) => {
