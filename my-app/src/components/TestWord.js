@@ -1,8 +1,5 @@
 import React from 'react';
-import {
-  doc,
-  updateDoc,
-} from 'firebase/firestore';
+import { doc, updateDoc } from 'firebase/firestore';
 import { db } from 'fbase';
 import { WORD_STACK, MEANING_STACK } from 'types';
 import 'css/TestWord.css';
@@ -12,7 +9,7 @@ const TestWord = ({
   wordObj,
   stackType,
   countIncrease,
-  setReviewWords
+  setReviewWords,
 }) => {
   const wordRef = doc(
     db,
@@ -26,6 +23,7 @@ const TestWord = ({
         wordObj[stackType] === undefined
           ? 1
           : wordObj[stackType] + 1,
+      latestReview: Date.now(),
     });
     countIncrease();
   };
@@ -53,7 +51,7 @@ const TestWord = ({
         className="btn red"
         onClick={() => {
           countIncrease();
-          setReviewWords((prew) => [...prew, wordObj])
+          setReviewWords((prew) => [...prew, wordObj]);
         }}
       >
         <span>패스</span>

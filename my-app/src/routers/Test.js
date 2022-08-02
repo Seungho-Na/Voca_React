@@ -29,16 +29,22 @@ const Test = ({ userObj }) => {
     // 쿨타임 안된 단어 배제
     const filttedWords = selectedWords.filter((item) => {
       const stack = item[stack_type];
-      const createdTime = item.createdAt;
-      if (stack === undefined) {
+      const latestReviewTime = item.latestReview;
+      if (
+        stack === undefined ||
+        latestReviewTime === undefined
+      ) {
         return true;
       } else {
         return (
-          (Date.now() - createdTime) / 1000 >
-          3600 * 24 * 3 ** stack
+          (Date.now() - latestReviewTime) / 1000 >
+          3600 * 24 * 2.5 ** stack
         );
       }
     });
+    filttedWords.sort(
+      (a, b) => a[stack_type] - b[stack_type]
+    );
     setTestWords(filttedWords);
   };
   const onNoteReset = () => {
@@ -89,7 +95,7 @@ const Test = ({ userObj }) => {
   useEffect(() => {
     const snapShotQuery = query(
       collection(db, `${userObj.uid}`),
-      orderBy('createdAt')
+      orderBy('createdAt', 'desc')
     );
     onSnapshot(snapShotQuery, (querySnapshot) => {
       const wordData = querySnapshot.docs.map((doc) => ({
@@ -127,8 +133,12 @@ const Test = ({ userObj }) => {
                       : '단어로 시험보기'}
                   </button>
                 </div>
-                <span className='alert-text'>양심적으로 체크하삼</span>
-                <span>({count}/{testWords.length})</span>
+                <span className="alert-text">
+                  양심적으로 체크하삼
+                </span>
+                <span>
+                  ({count}/{testWords.length})
+                </span>
                 {testWords.map(
                   (wordObj, index) =>
                     count === index && (

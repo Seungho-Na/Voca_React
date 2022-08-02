@@ -5,12 +5,12 @@
   align-items: center;
 }
 
-input {
+.container table input {
   height: 30px;
   width: 300px;
 }
 
-textarea {
+.container table textarea {
   height: 30px;
   width: 300px;
 }
