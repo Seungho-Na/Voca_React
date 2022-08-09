@@ -19,6 +19,7 @@ const Note = ({ userObj }) => {
   const [searchWord, setSearchWord] = useState('');
   const [pageIndex, setPageIndex] = useState(0);
   const [startX, setStartX] = useState(0);
+  const [boldElement, setBoldElement] = useState(null);
 
   const onSearchChange = (e) => {
     const {
@@ -63,7 +64,19 @@ const Note = ({ userObj }) => {
     const {
       target: { id },
     } = e;
+    console.log(e);
     const page_index = parseInt(id);
+    // 다른 페이지 인덱스를 클릭하면
+    if (e.target !== boldElement) {
+      // 기존의 bold 클래스를 지우고 클릭한 요소에 bold 클래스 준다
+      if (boldElement !== null) {
+        boldElement.className = '';
+      }
+      setBoldElement(e.target);
+      e.target.className = 'bold';
+      console.log(boldElement);
+    }
+
     setPageIndex(page_index);
     setPageWords(
       noteWords.slice(
