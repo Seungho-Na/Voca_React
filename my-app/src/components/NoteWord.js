@@ -51,6 +51,7 @@ const NoteWord = ({ userObj, wordObj, isOwner }) => {
 
   useEffect(() => {
     setNewMean(wordObj.meaning);
+    setShowMeaning(false);
   }, [wordObj]);
   return (
     <>

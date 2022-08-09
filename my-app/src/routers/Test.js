@@ -137,7 +137,7 @@ const Test = ({ userObj }) => {
                   양심적으로 체크하삼
                 </span>
                 <span>
-                  ({count}/{testWords.length})
+                  ({count + 1}/{testWords.length})
                 </span>
                 {testWords.map(
                   (wordObj, index) =>

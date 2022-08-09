@@ -8,6 +8,7 @@ import {
 } from 'firebase/firestore';
 import NoteWord from 'components/NoteWord';
 import 'css/Note.css';
+import { connectStorageEmulator } from 'firebase/storage';
 
 const Note = ({ userObj }) => {
   const [noteList, setNoteList] = useState([]);
@@ -18,7 +19,6 @@ const Note = ({ userObj }) => {
   const [searchWord, setSearchWord] = useState('');
   const [pageIndex, setPageIndex] = useState(0);
   const [startX, setStartX] = useState(0);
-  const [endX, setEndX] = useState(0);
 
   const onSearchChange = (e) => {
     const {
@@ -73,38 +73,34 @@ const Note = ({ userObj }) => {
     );
   };
   const prev = () => {
-    if (pageIndex >= 0) {
-      setPageIndex((prev) => prev - 1);
-      setPageWords(
-        noteWords.slice(
-          pageIndex * 10,
-          (pageIndex + 1) * 10
-        )
-      );
+    if (pageIndex > 0) {
+      setPageIndex((prev) => {
+        setPageWords(
+          noteWords.slice((prev - 1) * 10, prev * 10)
+        );
+        return prev - 1;
+      });
     }
   };
   const next = () => {
-    if (pageIndex < Math.ceil(noteWords.length / 10)) {
-      setPageIndex((prev) => prev + 1);
-      setPageWords(
-        noteWords.slice(
-          pageIndex * 10,
-          (pageIndex + 1) * 10
-        )
-      );
-       
+    if (pageIndex < Math.ceil(noteWords.length / 10) - 1) {
+      setPageIndex((prev) => {
+        setPageWords(
+          noteWords.slice((prev + 1) * 10, (prev + 2) * 10)
+        );
+        return prev + 1;
+      });
     }
   };
   const onTouchStart = (event) => {
-    const start_x = event.touches[0].pageX;
-    setStartX(start_x);
+    setStartX(event.touches[0].pageX);
   };
   const onTouchEnd = (event) => {
     const end_x = event.changedTouches[0].pageX;
-    setEndX(end_x);
-    if (startX > end_x) {
+    // 적어도 20px 이상 슬라이드 해야됨
+    if (startX > end_x + 20) {
       next();
-    } else {
+    } else if (startX < end_x - 20) {
       prev();
     }
   };
