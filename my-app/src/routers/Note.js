@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { db } from 'fbase';
 import {
   onSnapshot,
@@ -20,6 +20,7 @@ const Note = ({ userObj }) => {
   const [pageIndex, setPageIndex] = useState(0);
   const [startX, setStartX] = useState(0);
   const [boldElement, setBoldElement] = useState(null);
+  const naviRef = useRef();
 
   const onSearchChange = (e) => {
     const {
@@ -110,10 +111,19 @@ const Note = ({ userObj }) => {
   };
   const onTouchEnd = (event) => {
     const end_x = event.changedTouches[0].pageX;
+    boldElement.className = '';
     // 적어도 20px 이상 슬라이드 해야됨
     if (startX > end_x + 20) {
+      const nextLi =
+        naviRef.current.children[pageIndex + 1];
+      setBoldElement(nextLi);
+      nextLi.className = 'bold';
       next();
     } else if (startX < end_x - 20) {
+      const prevLi =
+        naviRef.current.children[pageIndex - 1];
+      setBoldElement(prevLi);
+      prevLi.className = 'bold';
       prev();
     }
   };
@@ -193,7 +203,7 @@ const Note = ({ userObj }) => {
         ))}
       </div>
       <div>
-        <ul className="page-navi">
+        <ul className="page-navi" ref={naviRef}>
           {[
             ...Array(
               Math.ceil(noteWords.length / 10)
