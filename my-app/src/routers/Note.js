@@ -40,7 +40,6 @@ const Note = ({ userObj }) => {
     );
     setNoteWords(changedWords);
     setPageWords(changedWords.slice(0, 10));
-    console.log(changedWords);
   };
   const onSearch = (e) => {
     const results = noteWords.filter((item) => {
@@ -111,15 +110,16 @@ const Note = ({ userObj }) => {
   };
   const onTouchEnd = (event) => {
     const end_x = event.changedTouches[0].pageX;
-    boldElement.className = '';
-    // 적어도 20px 이상 슬라이드 해야됨
-    if (startX > end_x + 20) {
+    // 적어도 30px 이상 슬라이드 해야됨
+    if (startX > end_x + 30) {
+      boldElement.className = '';
       const nextLi =
         naviRef.current.children[pageIndex + 1];
       setBoldElement(nextLi);
       nextLi.className = 'bold';
       next();
-    } else if (startX < end_x - 20) {
+    } else if (startX < end_x - 30) {
+      boldElement.className = '';
       const prevLi =
         naviRef.current.children[pageIndex - 1];
       setBoldElement(prevLi);
