@@ -3,6 +3,7 @@ import { onAuthStateChanged } from 'firebase/auth';
 import { auth } from 'fbase';
 import AppRouter from 'components/Router';
 import 'css/mediaqueries.css';
+import Loading from './Loading';
 
 function App() {
   const [init, setInit] = useState(false);
@@ -27,7 +28,7 @@ function App() {
   return init ? (
     <AppRouter isLoggedIn={isLoggedIn} userObj={userObj} />
   ) : (
-    <div>initailizing...</div>
+    <Loading />
   );
 }
 
